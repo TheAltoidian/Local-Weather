@@ -9,15 +9,18 @@
 </head>
 
 <body>
-    <div class="input-form">
+    <form class="input-form" id="input-form">
         <div class="address-text">
-            <input type="text" name="street-address" placeholder="Street Address">
-            <input type="text" name="city" placeholder="City">
-            <input type="text" name="State-Abbreviation" placeholder="State Abbreviation">
-            <input type="text" name="zipcode" placeholder="Zipcode">
+            <input type="text" id="street-address" placeholder="Street Address">
+            <input type="text" id="city" placeholder="City">
+            <input type="text" id="State-Abbreviation" placeholder="State Abbreviation">
+            <input type="text" id="zipcode" placeholder="Zipcode">
+            <button class="btn" id="submit-address" type="submit">Submit Address</button>
         </div>
-        <button class="btn" id="submit-address" type="submit">Submit Address</button>
-    </div>
+        
+    </form>
+
+<script src="./script.js"></script>
 </body>
 
 </html>
