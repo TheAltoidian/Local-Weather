@@ -2,25 +2,25 @@ let addressForm = document.querySelector("#input-form");
 
 function submitInfo(event) {
     event.preventDefault();
-    
-    // take input, turn it into variables, replace spaces with +sign
-    let address = document.getElementById("street-address").value.replace(/ /g, "+");
+
+    //get city from page, turn it into a url
     let city = document.getElementById("city").value.replace(/ /g, "+");
-    let state = document.getElementById("State-Abbreviation").value.replace(/ /g, "+");
-    let zipcode = document.getElementById("zipcode").value.replace(/ /g, "+");
-    console.log(address + ", " + city + ", " + state + " " + zipcode);
+    search = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=20218664feca793b07da2ba8243b7197';
 
-    // let cleanAddress = address.replace(/ /g, "+")
-    // let cleanCity = city.replace(/ /g, "+")
-    // let cleanState = state.replace(/ /g, "+")
-    // let cleanZipcode = zipcode.replace(/ /g, "+")
-    // console.log(cleanAddress + ", " + cleanCity + ", " + cleanState + " " + cleanZipcode)
-
-    fetch("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="+address+"%2C+"+city+"%2C+"+state+"+"+zipcode+"&benchmark=2020&format=json")
+    //turn city into coordinates, pass coordinates to weather function
+    fetch(search)
         .then(function (response) {
-            console.log(response)
+            response.json().then(function (data) {
+                let lat = data[0].lat;
+                let lon = data[0].lon;
+                console.log("lat/lon: " + lat + ", " + lon);
+                weatherSearch(lat, lon);
+            })
         });
+};
 
-}
-// console.log(addressForm)
+function weatherSearch(lat, lon) {
+
+} 
+
 addressForm.addEventListener("submit", submitInfo)
