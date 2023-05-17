@@ -1,5 +1,12 @@
 let addressForm = document.querySelector("#input-form");
 
+//update default text with previously searched weather
+function updatePage() {
+    document.getElementById("displayedCity").textContent = localStorage.getItem("recentCity");
+    document.getElementById("displayedWeather").textContent = localStorage.getItem("recentWeather") + "°F";
+}
+
+//Pull requested city from search box, send it to weather search function
 function submitInfo(event) {
     event.preventDefault();
 
@@ -40,4 +47,6 @@ function weatherSearch(lat, lon) {
         });
 }
 
+//check if there's previously stored information to update the page with, then accept inputs
+if (localStorage.getItem("recentCity") && localStorage.getItem("recentWeather")) {updatePage()}
 addressForm.addEventListener("submit", submitInfo)
