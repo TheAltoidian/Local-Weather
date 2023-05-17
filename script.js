@@ -19,8 +19,15 @@ function submitInfo(event) {
         });
 };
 
+//take coordinates from submitInfo(), send it to open-meteo weather API
 function weatherSearch(lat, lon) {
-
-} 
+    let weatherRequest = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current_weather=true&temperature_unit=fahrenheit';
+    fetch(weatherRequest)
+        .then(function (response) {
+            response.json().then(function (data) {
+                console.log(data.current_weather.temperature);
+            });
+        });
+}
 
 addressForm.addEventListener("submit", submitInfo)
