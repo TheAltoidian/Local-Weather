@@ -1,10 +1,24 @@
 let addressForm = document.querySelector("#input-form");
 
+
+
+
 //update default text with previously searched weather
 function updatePage() {
     document.getElementById("displayedCity").textContent = localStorage.getItem("recentCity");
     document.getElementById("displayedWeather").textContent = localStorage.getItem("recentWeather") + "°F";
+    document.getElementById("pastCity1").textContent = pastCities[1].city;
+    document.getElementById("pastWeather1").textContent = pastCities[1].weather + "°F";
+    document.getElementById("pastCity2").textContent = pastCities[2].city;
+    document.getElementById("pastWeather2").textContent = pastCities[2].weather + "°F";
+    document.getElementById("pastCity3").textContent = pastCities[3].city;
+    document.getElementById("pastWeather3").textContent = pastCities[3].weather + "°F";
+    document.getElementById("pastCity4").textContent = pastCities[4].city;
+    document.getElementById("pastWeather4").textContent = pastCities[4].weather + "°F";
 }
+
+
+
 
 //Pull requested city from search box, send it to weather search function
 function submitInfo(event) {
@@ -21,32 +35,46 @@ function submitInfo(event) {
             response.json().then(function (data) {
                 let lat = data[0].lat;
                 let lon = data[0].lon;
-                // console.log("lat/lon: " + lat + ", " + lon);
 
                 //display city, store as most recent city
                 document.getElementById("displayedCity").textContent = city;
                 localStorage.setItem("recentCity", city);
-                weatherSearch(lat, lon);
+                weatherSearch(lat, lon, city);
             })
         });
 };
 
 //take coordinates from submitInfo(), send it to open-meteo weather API
-function weatherSearch(lat, lon) {
+function weatherSearch(lat, lon, city) {
     let weatherRequest = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current_weather=true&temperature_unit=fahrenheit';
     fetch(weatherRequest)
         .then(function (response) {
             response.json().then(function (data) {
-                // console.log(data.current_weather.temperature);
 
-                //display weather, store as most recent weather
+                //display weather, store as most recent weather, add to list of recent searches, trim list length to 5
                 let weather = data.current_weather.temperature
                 document.getElementById("displayedWeather").textContent = weather + "°F";
                 localStorage.setItem("recentWeather", weather)
+                pastCities.unshift({city,weather})
+                console.log("city: " + city + " weather: " + weather)
+                if (pastCities.length > 5){
+                    pastCities.pop();
+                    console.log(pastCities);
+                }
+                localStorage.setItem("pastCities", JSON.stringify(pastCities))
+                updatePage();
             });
         });
 }
 
 //check if there's previously stored information to update the page with, then accept inputs
-if (localStorage.getItem("recentCity") && localStorage.getItem("recentWeather")) {updatePage()}
+let pastCities = [];
+if (localStorage.getItem("pastCities")) {
+    pastCities = JSON.parse(localStorage.getItem("pastCities"))
+}
+if (localStorage.getItem("recentCity") && localStorage.getItem("recentWeather")) { updatePage() }
 addressForm.addEventListener("submit", submitInfo)
+//updates list of previously viewed cities and weathers 
+
+console.log(pastCities);
+console.log(pastCities[1].city);
