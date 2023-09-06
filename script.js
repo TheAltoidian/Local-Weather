@@ -7,17 +7,28 @@ let addressForm = document.querySelector("#input-form");
 function updatePage() {
     document.getElementById("displayedCity").textContent = localStorage.getItem("recentCity");
     document.getElementById("displayedWeather").textContent = localStorage.getItem("recentWeather") + "°F";
+    document.getElementById("displayedIcon").textContent = pastCities[0].icon;
     document.getElementById("pastCity1").textContent = pastCities[1].city;
     document.getElementById("pastWeather1").textContent = pastCities[1].weather + "°F";
+    document.getElementById("pastIcon1").textContent = pastCities[1].icon;
     document.getElementById("pastCity2").textContent = pastCities[2].city;
     document.getElementById("pastWeather2").textContent = pastCities[2].weather + "°F";
+    document.getElementById("pastIcon2").textContent = pastCities[2].icon;
     document.getElementById("pastCity3").textContent = pastCities[3].city;
     document.getElementById("pastWeather3").textContent = pastCities[3].weather + "°F";
+    document.getElementById("pastIcon3").textContent = pastCities[3].icon;
     document.getElementById("pastCity4").textContent = pastCities[4].city;
     document.getElementById("pastWeather4").textContent = pastCities[4].weather + "°F";
+    document.getElementById("pastIcon4").textContent = pastCities[4].icon;
 }
 
-
+//create image of weather
+function weatherImage(code) {
+    switch (code) {
+        case 0:
+            return()
+    }
+}
 
 
 //Pull requested city from search box, send it to weather search function
@@ -53,13 +64,14 @@ function weatherSearch(lat, lon, city) {
 
                 //display weather, store as most recent weather, add to list of recent searches, trim list length to 5
                 let weather = data.current_weather.temperature
+                let icon = data.current_weather.weathercode
                 document.getElementById("displayedWeather").textContent = weather + "°F";
+                document.getElementById("displayedIcon").textContent = icon
                 localStorage.setItem("recentWeather", weather)
-                pastCities.unshift({city,weather})
-                console.log("city: " + city + " weather: " + weather)
+                localStorage.setItem("recentIcon", icon)
+                pastCities.unshift({city,weather,icon})
                 if (pastCities.length > 5){
                     pastCities.pop();
-                    console.log(pastCities);
                 }
                 localStorage.setItem("pastCities", JSON.stringify(pastCities))
                 updatePage();
@@ -72,9 +84,6 @@ let pastCities = [];
 if (localStorage.getItem("pastCities")) {
     pastCities = JSON.parse(localStorage.getItem("pastCities"))
 }
-if (localStorage.getItem("recentCity") && localStorage.getItem("recentWeather")) { updatePage() }
+if (localStorage.getItem("recentCity") && localStorage.getItem("recentWeather") && localStorage.getItem("recentIcon")) { updatePage() }
 addressForm.addEventListener("submit", submitInfo)
 //updates list of previously viewed cities and weathers 
-
-console.log(pastCities);
-console.log(pastCities[1].city);
