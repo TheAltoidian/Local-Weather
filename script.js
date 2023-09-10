@@ -7,27 +7,39 @@ let addressForm = document.querySelector("#input-form");
 function updatePage() {
     document.getElementById("displayedCity").textContent = localStorage.getItem("recentCity");
     document.getElementById("displayedWeather").textContent = localStorage.getItem("recentWeather") + "°F";
-    document.getElementById("displayedIcon").textContent = pastCities[0].icon;
+    document.getElementById("displayedIcon").src = weatherImage(pastCities[0].icon);
     document.getElementById("pastCity1").textContent = pastCities[1].city;
     document.getElementById("pastWeather1").textContent = pastCities[1].weather + "°F";
-    document.getElementById("pastIcon1").textContent = pastCities[1].icon;
+    document.getElementById("pastIcon1").src = weatherImage(pastCities[1].icon);
     document.getElementById("pastCity2").textContent = pastCities[2].city;
     document.getElementById("pastWeather2").textContent = pastCities[2].weather + "°F";
-    document.getElementById("pastIcon2").textContent = pastCities[2].icon;
+    document.getElementById("pastIcon2").src = weatherImage(pastCities[2].icon);
     document.getElementById("pastCity3").textContent = pastCities[3].city;
     document.getElementById("pastWeather3").textContent = pastCities[3].weather + "°F";
-    document.getElementById("pastIcon3").textContent = pastCities[3].icon;
+    document.getElementById("pastIcon3").src = weatherImage(pastCities[3].icon);
     document.getElementById("pastCity4").textContent = pastCities[4].city;
     document.getElementById("pastWeather4").textContent = pastCities[4].weather + "°F";
-    document.getElementById("pastIcon4").textContent = pastCities[4].icon;
+    document.getElementById("pastIcon4").src = weatherImage(pastCities[4].icon);
 }
 
 //create image of weather
 function weatherImage(code) {
-    switch (code) {
-        case 0:
-            return()
-    }
+    if (code == 0) {
+        return ('./icons/sun.png')
+    } else if ([1, 2, 3].includes(code)) {
+        return ('./icons/cloudy.png')
+    } else if ([45, 48].includes(code)) {
+        return ('./icons/fog.png')
+    } else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) {
+        return ('./icons/rain.png')
+    } else if ([71, 73, 75, 77, 85, 86].includes(code)){
+        return ('./icons/snow.png')
+    } else if ([95, 96, 98].includes(code)) {
+        return ('./icons/lightning.png')
+    } else {
+        console.log("code: " + code)
+        return ("")
+    };
 }
 
 
@@ -69,8 +81,8 @@ function weatherSearch(lat, lon, city) {
                 document.getElementById("displayedIcon").textContent = icon
                 localStorage.setItem("recentWeather", weather)
                 localStorage.setItem("recentIcon", icon)
-                pastCities.unshift({city,weather,icon})
-                if (pastCities.length > 5){
+                pastCities.unshift({ city, weather, icon })
+                if (pastCities.length > 5) {
                     pastCities.pop();
                 }
                 localStorage.setItem("pastCities", JSON.stringify(pastCities))
