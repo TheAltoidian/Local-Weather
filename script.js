@@ -53,7 +53,7 @@ function submitInfo(event) {
     let city = document.getElementById("city").value;
     city = capitalizeFirstLetter(city)
     document.getElementById('city').value = ''
-    search = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=20218664feca793b07da2ba8243b7197';
+    search = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=20218664feca793b07da2ba8243b7197';
 
     //turn city into coordinates, pass coordinates to weather function
     fetch(search)
