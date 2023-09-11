@@ -8,20 +8,20 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+    <link href="./style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <h1 class="text-center">Find Your Weather</h1>
+    <h1 class="text-center pb-5">Find Your Weather</h1>
 
     <div class="d-flex align-items-center">
         <!-- search box, most recently searched city -->
-        <section id="city-search" class="container col-6 text-center">
+        <section id="city-search" class="container col-6 text-center border rounded-5 bg-secondary bg-opacity-10">
             <form class="input-form" id="input-form">
                 <div class="address-text">
                     <input type="text" id="city" placeholder="City">
-                    <button class="btn" id="submit-address" type="submit">Submit City</button>
+                    <button class="btn" id="submit-address" type="submit">Enter City Name</button>
                 </div>
 
             </form>
@@ -31,42 +31,42 @@
                 <p id="displayedWeather"></p>
                 <!-- <p ></p> -->
                 <img id="displayedIcon" src="" alt="">
-                
+
             </div>
         </section>
 
         <!-- previously searched cities -->
-        <section class="container col-6 text-center d-flex ">
+        <section class="container col-6 text-center d-flex">
             <div id="1-2recent" class="col">
-                <div>
-                    <p id="pastCity1"></p>
-                    <p id="pastWeather1"></p>
-                    <!-- <p id="pastIcon1"></p> -->
-                    <img id="pastIcon1" src="" alt="">
-                    
+                <div class="p-3 ">
+                    <div class="border rounded-5 bg-secondary bg-opacity-10">
+                        <p id="pastCity1"></p>
+                        <p id="pastWeather1"></p>
+                        <img id="pastIcon1" src="" alt="">
+                    </div>
                 </div>
-                <div>
-                    <p id="pastCity2"></p>
-                    <p id="pastWeather2"></p>
-                    <!-- <p id="pastIcon2"></p> -->
-                    <img id="pastIcon2"src="" alt="">
-                    
+                <div class="p-3 ">
+                    <div class="border rounded-5 bg-secondary bg-opacity-10">
+                        <p id="pastCity2" class="b-5"></p>
+                        <p id="pastWeather2"></p>
+                        <img id="pastIcon2" src="" alt="">
+                    </div>
                 </div>
             </div>
             <div id="3-4recent" class="col">
-                <div>
-                    <p id="pastCity3"></p>
-                    <p id="pastWeather3"></p>
-                    <!-- <p id="pastIcon3"></p> -->
-                    <img id="pastIcon3"src="" alt="">
-                    
+                <div class="p-3 ">
+                    <div class="border rounded-5 bg-secondary bg-opacity-10">
+                        <p id="pastCity3"></p>
+                        <p id="pastWeather3"></p>
+                        <img id="pastIcon3" src="" alt="">
+                    </div>
                 </div>
-                <div>
-                    <p id="pastCity4"></p>
-                    <p id="pastWeather4"></p>
-                    <!-- <p id="pastIcon4"></p> -->
-                    <img id="pastIcon4"src="" alt="">
-                    
+                <div class="p-3 ">
+                    <div class="border rounded-5 bg-secondary bg-opacity-10">
+                        <p id="pastCity4"></p>
+                        <p id="pastWeather4"></p>
+                        <img id="pastIcon4" src="" alt="">
+                    </div>
                 </div>
             </div>
         </section>
